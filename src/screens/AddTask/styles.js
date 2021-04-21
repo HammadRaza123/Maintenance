@@ -23,6 +23,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: width(90),
     alignSelf: 'center'
-  }
+  },
+  dropdownField: {
+    width: width(90),
+    backgroundColor: Colors.transparent,
+    borderWidth: width(0.15),
+    padding: width(1),
+    height: height(5),
+    color:Colors.white,
+    justifyContent: 'center',
+    borderRadius: width(1),
+    borderColor: Colors.white,
+    marginBottom:height(1.5)
+},
 });
 export default styles;

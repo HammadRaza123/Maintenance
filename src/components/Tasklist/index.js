@@ -14,8 +14,8 @@ const Component = ({ date, title, assigne, areacode, description,
                 <View style={styles.textSection}>
                     <Text style={styles.datetext}>{date}</Text>
                     <Text style={styles.titletext}>{title}</Text>
-                    <Text style={styles.descriptiontext}>
-                        Assigned to : {assigne}</Text>
+                   {assigne&& <Text style={styles.descriptiontext}>
+                        Assigned to : {assigne}</Text>}
                     <Text style={styles.descriptiontext}>{areacode}</Text>
                     <Text style={styles.descriptiontext}>{description}</Text>
                     <Text style={styles.descriptiontext}>phone #:{phone}</Text>

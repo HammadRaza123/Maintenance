@@ -24,7 +24,7 @@ export default function EditTask(props) {
   return (
     <SafeAreaView style={styles.mainViewContainer}>
       <Header leadIcon leadingIcon={'angle-left'} rightIcon={'checkbox-active'}
-        editText={'Edit'}
+        editText={'Edit'} onpressADD={()=>props.navigation.goBack()}
       />
       <View style={styles.container}>
      <LabelRow

@@ -9,7 +9,7 @@ import BottomLine from '../../components/BottomLine';
 // import { Colors } from '../../utills/Colors';
 import Colors from '../../utills/Colors';
 
-export default function FilterTask({ navigation: { goBack } }) {
+export default function FilterTask({ navigation }) {
   const [statusValue, setstatusValue] = useState('All');
   const [rangeValue, setrangeValue] = useState('Today');
   const [locationValue, setlocationValue] = useState('Rentdigi/GSK');
@@ -26,7 +26,7 @@ export default function FilterTask({ navigation: { goBack } }) {
         <Header
           title={'Filter'}
           rightIcon={'close-a'}
-          onpressAction={() => goBack()}
+          onpressAction={() => navigation.goBack()}
         />
         <ScrollView style={styles.InnerContainer} showsVerticalScrollIndicator={false}>
           <Dropdown showLabel
@@ -78,9 +78,9 @@ export default function FilterTask({ navigation: { goBack } }) {
           />
         </ScrollView>
         <View style={styles.ButtonContainer}>
-          <Button  onPress={() => goBack()}
+          <Button  onPress={() => navigation.goBack()}
             title={'Cancel'}
-          /><Button onPress={() => goBack()}
+          /><Button onPress={() => navigation.goBack()}
             title={'Save'}
           />
         </View>

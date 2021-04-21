@@ -98,7 +98,7 @@ export default function BottomTab(props) {
                     }
                 </Tab.Screen>
 
-                <Tab.Screen name="Assets" options={{
+                {/* <Tab.Screen name="Assets" options={{
                     tabBarLabel: 'Assets',
                     tabBarIcon: ({ color, size }) => (
                         <Image style={{ tintColor: color }}
@@ -109,7 +109,7 @@ export default function BottomTab(props) {
                         <Stack.Screen name="Assets" component={Assets} />
                     </Stack.Navigator>
                     }
-                </Tab.Screen>
+                </Tab.Screen> */}
 
                 <Tab.Screen name="Stats" options={{
                     tabBarLabel: 'Stats',

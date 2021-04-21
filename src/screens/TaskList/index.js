@@ -1,87 +1,62 @@
-import React, { Fragment } from 'react';
-import { ScrollView, FlatList, View, Text, StatusBar, SafeAreaView, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  ScrollView,
+  FlatList,
+  View,
+  Text,
+  StatusBar,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import styles from './styles';
 import TaskListComponent from '../../components/Tasklist';
 import Header from '../../components/Header';
+import {getDetails} from '../../utills/Api';
 export default function TaskList(props) {
-  const data = [
-    {
-      id: '1',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'New'
-    },
-    {
-      id: '2',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'New'
-    },
-    {
-      id: '3',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'Pending'
-    },
-    {
-      id: '4',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'Closed'
-    },
-  ];
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    getData();
+  }, [page]);
+  const getData = async () => {
+    const res = await getDetails(page);
+    // console.log(res)
+    if (res.success) {
+      setPageCount(res.count);
+      setTasks([...res.data, ...tasks]);
+    }
+  };
   return (
     <SafeAreaView style={styles.mainViewContainer}>
       <Header
-      leadIcon
+        leadIcon
         leadingIcon={'plus-a'}
         title={'Task List'}
         rightIcon={'equalizer'}
-        onpressADD={() => props.navigation.navigate('AddTask')
-      }
-        onpressAction={() =>
-          props.navigation.navigate('FilterTask')
-      }
+        onpressADD={() => props.navigation.navigate('AddTask')}
+        onpressAction={() => props.navigation.navigate('FilterTask')}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <FlatList
-          data={data}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => {
-            return (
-              <TaskListComponent
-                key={item.id}
-                date={item.date}
-                title={item.title}
-                assigne={item.assigne}
-                areacode={item.areacode}
-                description={item.description}
-                phone={item.phone}
-                btnLabel={item.btnLabel}
-              />
-            );
-          }
-          }
-        />
-
-      </ScrollView>
-
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        onEndReached={() => setPage(page + 1)}
+        onEndReachedThreshold={0.5}
+        renderItem={({item}) => {
+          return (
+            <TaskListComponent
+              key={item.id}
+              date={item.createdAt.substr(0, 10)}
+              title={item.type.name}
+              assigne={item?.assignedVendors?.name}
+              areacode={item.area.shortName}
+              description={item.type.description}
+              phone={item.phone}
+              btnLabel={item.status}
+            />
+          );
+        }}
+      />
     </SafeAreaView>
   );
 }

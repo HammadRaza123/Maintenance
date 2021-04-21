@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import VendorSection from '../../components/VendorSection';
 import VendorDetails from '../../components/VendorDetails';
 import { width } from 'react-native-dimension';
-export default function HavcInfo({ navigation: { goBack } }) {
+export default function HavcInfo({ navigation }) {
   const data = [
     {label: 'Phone', value: '1745893437'},
     {label: 'Fax', value: '----------'},
@@ -21,7 +21,7 @@ export default function HavcInfo({ navigation: { goBack } }) {
     <SafeAreaView style={styles.mainViewContainer}>
       <Header hideActionIcon
         leadIcon
-        leadingIcon={'angle-left'} onpressADD={() => goBack()}
+        leadingIcon={'angle-left'} onpressADD={() => navigation.goBack()}
         title={'Vendors Information'}
       />
       <View style={{ marginTop: width(2) }}></View>

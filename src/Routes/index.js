@@ -1,23 +1,18 @@
-import React, {Component} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Login from '../screens/Login/index';
-import BottomTab from './BottomTab';
-import {useSelector} from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AuthStack from './Stacks/AuthStack';
+import HomeStack from './Stacks/HomeStack';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 export default function Routes() {
-    const isLogin = useSelector(state => state.Auth.isLogin)
+  const isLogin = useSelector(state => state.Auth.isLogin)
   return (
     <NavigationContainer>
-      {isLogin ? (
-        <Stack.Navigator initialRouteName="Login" headerMode="none">
-          <Stack.Screen name="Login" component={Login} />
-        </Stack.Navigator>
+      {!isLogin ? (<AuthStack />
       ) : (
-        <Stack.Navigator initialRouteName="BottomTab" headerMode="none">
-            <Stack.Screen name='BottomTab' component={BottomTab} />
-          </Stack.Navigator>
+        <HomeStack />
       )}
     </NavigationContainer>
   );

@@ -15,12 +15,19 @@ const styles = StyleSheet.create({
     borderRadius: width(4)
   },
   forgotBtn: {
-    alignSelf: 'flex-end',
-    marginRight: width(10)
+    padding: width(2.5)
   },
   forgotText: {
     fontSize: width(4),
-    color: Appcolor.pageBlack
+    color: Appcolor.primaryBlue
+  },
+  btnStyle: {
+    backgroundColor: Appcolor.primaryBlue
+  },
+  cancelBtnTextStyle: {
+    fontSize: width(5),
+    fontWeight: 'bold',
+    color: Appcolor.primaryBlue
   }
 });
 

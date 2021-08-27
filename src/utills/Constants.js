@@ -1,1 +1,1 @@
-export default BaseUrl = "https://google.com"
+export default BaseUrl = " http://rdcare.azurewebsites.net/v1/"

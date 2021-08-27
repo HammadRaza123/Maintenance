@@ -4,13 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Image } from 'react-native';
 import AddTask from '../screens/MainScreens/AddTask';
-import Assets from '../screens/MainScreens/Assets';
 import EditTask from '../screens/MainScreens/EditTask';
-import HavcInfo from '../screens/MainScreens/HavcInfo';
 import FilterTask from '../screens/MainScreens/FilterTask';
+import HavcInfo from '../screens/MainScreens/HavcInfo';
 import PaintingInfo from '../screens/MainScreens/PaintingInfo';
-import Setting from '../screens/MainScreens/Setting';
 import PlumbingInfo from '../screens/MainScreens/PlumbingInfo';
+import Setting from '../screens/MainScreens/Setting';
 import Stats from '../screens/MainScreens/Stats';
 import TaskList from '../screens/MainScreens/TaskList';
 import Vendors from '../screens/MainScreens/Vendors';
@@ -92,19 +91,6 @@ export default function BottomTab(props) {
                             <Stack.Screen name="PlumbingInfo" component={PlumbingInfo} />
                             <Stack.Screen name="PaintingInfo" component={PaintingInfo} />
                         </Stack.Navigator>
-                    }
-                </Tab.Screen>
-
-                <Tab.Screen name="Assets" options={{
-                    tabBarLabel: 'Assets',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image style={{ tintColor: color }}
-                            source={require('../assets/images/assets.png')} />
-                    )
-                }}>
-                    {() => <Stack.Navigator headerMode="none">
-                        <Stack.Screen name="Assets" component={Assets} />
-                    </Stack.Navigator>
                     }
                 </Tab.Screen>
 

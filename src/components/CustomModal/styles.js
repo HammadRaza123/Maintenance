@@ -13,9 +13,8 @@ const styles = StyleSheet.create({
     },
     modalHeading: {
         textAlign: 'center',
-        color: AppColors.textColor,
         fontSize: width(6),
-        fontFamily: 'Poppins-Bold'
+        fontWeight: 'bold'
     },
     closeContainer: {
         width: width(80),
@@ -29,12 +28,19 @@ const styles = StyleSheet.create({
     bodyContainer: {
         justifyContent: 'space-evenly',
     },
+    modalBodyText: {
+        paddingHorizontal: width(4),
+        marginVertical: height(2),
+        fontSize: width(4),
+    },
     inputBox: {
         width: '95%',
         alignSelf: 'center',
-        backgroundColor: AppColors.transparent,
         borderColor: AppColors.gray,
-        borderWidth: width(.15)
+        borderWidth: width(.15),
+        borderBottomWidth: width(.15),
+        borderRadius: width(2)
+        // borderBottomColor: AppColors.transparent
     },
     row: {
         flexDirection: 'row',

@@ -1,15 +1,16 @@
-import React, { Fragment, useState } from 'react';
-import { KeyboardAvoidingView, ScrollView, SafeAreaView, TextInput, View, Text } from 'react-native';
-import styles from './styles';
-import Header from '../../../components/Header';
-import Dropdown from '../../../components/Dropdown';
-import ToggleButton from '../../../components/ToggleButton';
+import { useLinkProps } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import BottomLine from '../../../components/BottomLine';
 import Button from '../../../components/Button';
 import Counter from '../../../components/Counter';
-import BottomLine from '../../../components/BottomLine';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Dropdown from '../../../components/Dropdown';
+import Header from '../../../components/Header';
 import MultilineInputbox from '../../../components/MultilineInputbox';
+import ToggleButton from '../../../components/ToggleButton';
 import Colors from '../../../utills/Colors';
+import styles from './styles';
 export default function AddTask({ navigation }) {
   const [statusValue, setstatusValue] = useState('All');
   const [typeValue, settypeValue] = useState('AirCondition');
@@ -17,7 +18,7 @@ export default function AddTask({ navigation }) {
   const [areaValue, setareaValue] = useState('1071 Chappelle');
   const [assignedValue, setassignedValue] = useState('Bath');
   const [roomValue, setroomValue] = useState('Newest to Oldest');
-  const [statusOptions, setstatusOptions] = useState(['option1', 'option2']);
+  const [statusOptions, setstatusOptions] = useState(['New', 'Closed', 'Re-newed', 'Pending', 'Delayed', 'Excluded']);
   const [typeOptions, settypeOptions] = useState(['option1', 'option2']);
   const [locationOptions, setlocationOptions] = useState(['option1', 'option2']);
   const [areaOptions, setareaOptions] = useState(['option1', 'option2']);
@@ -31,7 +32,7 @@ export default function AddTask({ navigation }) {
         <Header
           title={'Add'}
           rightIcon={'close-a'}
-          onpressAction={() => goBack()} />
+          onpressAction={() => navigation.goBack()} />
         <ScrollView style={styles.InnerContainer} showsVerticalScrollIndicator={false}>
           {/* <KeyboardAvoidingView
           style={{ flex: 1 }}

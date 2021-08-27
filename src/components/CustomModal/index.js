@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { height } from 'react-native-dimension';
+import { height, width } from 'react-native-dimension';
 import Modal from 'react-native-modal';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AppColors from '../../utills/Colors';
 import Button from '../Button';
-import { MultiInput } from '../InputField';
+import { InputField, MultiInput } from '../InputField';
 import styles from './styles';
 export const CustomModal = ({
     isVisible = false,
@@ -45,10 +45,14 @@ export const CustomModal = ({
 export const ForgotModal = ({
     isVisible = false,
     modalHeading = '',
+    value = '',
+    onChangeText = '',
+    modalBodyText = '',
     onClose = () => { },
     onPressCancel = () => { },
-    onPressYes = () => { },
-    placeholder = '',
+    onPressSend = () => { },
+    errorMsg = '',
+    errorEnabled = false,
     cancelBtnTextStyle = {}
 }) => {
     return (<Modal isVisible={isVisible} >
@@ -62,12 +66,15 @@ export const ForgotModal = ({
             </View>
 
             <View style={styles.bodyContainer}>
-
+                <Text style={styles.modalBodyText}>{modalBodyText}</Text>
+                <InputField mainContainer={styles.inputBox} placeholder='email' value={value}
+                    onChangeText={(value) => onChangeText(value)} errorMsg={errorMsg} errorEnabled={errorEnabled}
+                />
                 <View style={styles.row}>
                     <Button containerStyle={styles.noButtonStyle} btnTextStyle={cancelBtnTextStyle}
                         title={'Cancel'} onPress={onPressCancel} />
                     <Button containerStyle={styles.buttonStyle}
-                        title={'Yes'} onPress={onPressYes} />
+                        title={'Send Email'} onPress={onPressSend} />
                 </View>
 
             </View>

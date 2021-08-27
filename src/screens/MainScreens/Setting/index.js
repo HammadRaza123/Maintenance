@@ -9,9 +9,7 @@ export default function Setting() {
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.mainViewContainer}>
-      <Header rightIcon={'save'}
-        title={'Setting'}
-      />
+      <Header title={'Setting'} hideActionIcon />
       <Button title='logout' onPress={() => dispatch(logout())} />
     </SafeAreaView>
   );

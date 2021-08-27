@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     margin: width(5),
     borderRadius: width(4)
   },
+  headingText: {
+    fontSize: width(6),
+    fontWeight: 'bold',
+    color: Appcolor.pageBlack
+  },
   forgotBtn: {
     padding: width(2.5)
   },

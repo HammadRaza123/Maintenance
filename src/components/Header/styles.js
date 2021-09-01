@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         left: width(5),
         padding: width(2),
-        alignSelf:'center',
+        alignSelf: 'center',
         borderRadius: width(4),
         backgroundColor: Colors.white
     },
@@ -18,18 +18,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: width(6),
-        alignContent:'center',
+        alignContent: 'center',
         color: Colors.white
     },
-    headerRightSection:{
-        width:'25%',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+    headerRightSection: {
+        width: '25%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     rightIcon: {
         right: width(5),
-        alignSelf:'center',
+        alignSelf: 'center',
         backgroundColor: Colors.white,
         padding: width(2),
         borderRadius: width(4),
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: height(1.5),
-        borderBottomLeftRadius: width(5),
-        borderBottomRightRadius: width(5),
-        alignContent:'center'
+        // borderBottomLeftRadius: width(5),
+        // borderBottomRightRadius: width(5),
+        alignContent: 'center'
     }
 }
 );

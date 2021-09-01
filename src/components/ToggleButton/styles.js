@@ -7,7 +7,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        padding: width(2),
+        marginBottom: height(2)
     },
     toggleLabel: {
         color: Colors.white,

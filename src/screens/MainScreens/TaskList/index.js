@@ -1,79 +1,45 @@
-import React from 'react';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, ScrollView } from 'react-native';
 import Header from '../../../components/Header';
 import TaskListComponent from '../../../components/Tasklist';
+import { Get_TaskList } from '../../../Services/Request';
 import styles from './styles';
 export default function TaskList(props) {
-  const data = [
-    {
-      id: '1',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'New'
-    },
-    {
-      id: '2',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'New'
-    },
-    {
-      id: '3',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'Pending'
-    },
-    {
-      id: '4',
-      date: '17 Nov 2021',
-      title: 'Light',
-      assigne: 'John',
-      areacode: "309 111 SH",
-      description: 'Burnt out light under microwave phone next to me ipsum wave to next sporty boy to you...read more',
-      phone: '3068307322',
-      btnLabel: 'Closed'
-    },
-  ];
+  const [taskList, setTaskList] = useState([])
+  const getTaskList = async () => {
+    const response = await Get_TaskList()
+    if (response?.success) {
+      setTaskList(response.data.tasks)
+    }
+    else {
+      console.log('Task Type error is', JSON.stringify(response.data));
+    }
+  }
+  useEffect(() => {
+    getTaskList()
+  }, [])
   return (
     <SafeAreaView style={styles.mainViewContainer}>
-      <Header
-        leadIcon
-        leadingIcon={'plus-a'}
-        title={'Task List'}
-        rightIcon={'equalizer'}
-        onpressADD={() => props.navigation.navigate('AddTask')
-        }
-        onpressAction={() =>
-          props.navigation.navigate('FilterTask')
-        }
+      <Header leadIcon leadingIcon={'plus-a'} title={'Task List'} rightIcon={'equalizer'}
+        onpressADD={() => props.navigation.navigate('AddTask')}
+        onpressAction={() => props.navigation.navigate('Filter')}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <FlatList
-          data={data}
-          keyExtractor={item => item.id}
+          data={taskList}
+          keyExtractor={item => item._id}
           renderItem={({ item }) => {
             return (
               <TaskListComponent
-                key={item.id}
-                date={item.date}
-                title={item.title}
-                assigne={item.assigne}
-                areacode={item.areacode}
-                description={item.description}
-                phone={item.phone}
-                btnLabel={item.btnLabel}
+                key={item._id}
+                createdAt={moment(item.createdAt).format('DD-MM-YYYY')}
+                submittedBy={item?.submittedBy}
+                assignedVendors={item?.assignedVendors?.name}
+                areacode={item?.suit + ' , ' + item.area.name}
+                description={item?.details}
+                phone={item?.phone}
+                status={item?.status}
               />
             );
           }

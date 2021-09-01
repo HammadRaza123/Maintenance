@@ -5,7 +5,8 @@ import * as React from 'react';
 import { Image } from 'react-native';
 import AddTask from '../screens/MainScreens/AddTask';
 import EditTask from '../screens/MainScreens/EditTask';
-import FilterTask from '../screens/MainScreens/FilterTask';
+import Filter from '../screens/MainScreens/Filter';
+import FilteredTasks from '../screens/MainScreens/FilteredTasks';
 import HavcInfo from '../screens/MainScreens/HavcInfo';
 import PaintingInfo from '../screens/MainScreens/PaintingInfo';
 import PlumbingInfo from '../screens/MainScreens/PlumbingInfo';
@@ -62,6 +63,7 @@ export default function BottomTab(props) {
                     inactiveTintColor: Colors.white60,
                     tabStyle: { backgroundColor: Colors.primaryBlue },
                     labelStyle: { color: Colors.white },
+                    keyboardHidesTabBar: true
                 }} >
                 <Tab.Screen name="TaskList" options={{
                     tabBarIcon: ({ color, size }) => (
@@ -71,7 +73,8 @@ export default function BottomTab(props) {
                 }}>
                     {() => <Stack.Navigator headerMode="none">
                         <Stack.Screen name="TaskList" component={TaskList} />
-                        <Stack.Screen name="FilterTask" component={FilterTask} />
+                        <Stack.Screen name="Filter" component={Filter} />
+                        <Stack.Screen name="FilteredTasks" component={FilteredTasks} />
                         <Stack.Screen name="AddTask" component={AddTask} />
                         <Stack.Screen name="EditTask" component={EditTask} />
                     </Stack.Navigator>}

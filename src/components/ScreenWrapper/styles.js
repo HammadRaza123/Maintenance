@@ -3,7 +3,7 @@ import { height } from 'react-native-dimension'
 import AppColors from '../../utills/Colors';
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   scroll: {
     flex: 1,

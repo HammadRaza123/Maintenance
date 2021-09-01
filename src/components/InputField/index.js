@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { width } from 'react-native-dimension';
 import Feather from 'react-native-vector-icons/Feather';
-import * as Animatable from 'react-native-animatable';
 import AppColors from '../../utills/Colors';
 import styles from './styles';
 
@@ -59,4 +59,20 @@ export const MultiInput = ({
       </View>
     </View>
   );
+};
+
+export const LabelRow = ({
+  labelValue = '',
+  value = '',
+  onChangeText = () => { },
+  editable = true,
+  keyboardType = 'default'
+}) => {
+  return (
+    <View style={styles.labelRow}>
+      <Text style={styles.labelValue}>{labelValue}</Text>
+      <TextInput style={styles.inputValue} value={value} onChangeText={onChangeText} keyboardType={keyboardType}
+        editable={editable} />
+    </View>
+  )
 };

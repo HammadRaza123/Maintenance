@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { height, width } from 'react-native-dimension';
+import { LabelRow } from '.';
 import AppColors from '../../utills/Colors';
 
 const styles = StyleSheet.create({
@@ -65,5 +66,32 @@ const styles = StyleSheet.create({
     fontSize: width(3.5),
     color: AppColors.black
   },
+  // *********************************** LabelRow***********************************************
+  labelRow: {
+    width: width(90),
+    backgroundColor: AppColors.transparent,
+    borderWidth: width(0.15),
+    paddingHorizontal: width(2),
+    height: height(5.0),
+    justifyContent: 'space-between',
+    borderRadius: width(1),
+    borderColor: AppColors.white,
+    marginBottom: height(1.5),
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  labelValue: {
+    width: '25%',
+    color: AppColors.white,
+    fontSize: width(4)
+  },
+  inputValue: {
+    width: '70%',
+    color: AppColors.white60,
+    fontSize: width(4),
+    padding: 0,
+    textDecorationLine: "none",
+    textAlign: 'right'
+  }
 });
 export default styles;

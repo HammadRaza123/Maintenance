@@ -12,4 +12,7 @@ export default {
     TASKS: {
         url: `${BASE_URL}tasks`,
     },
+    CLASS: {
+        url: `${BASE_URL}class`,
+    },
 }

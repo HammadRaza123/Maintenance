@@ -1,15 +1,47 @@
 import { StyleSheet } from 'react-native';
-import { width } from 'react-native-dimension';
-import Colors from '../../../utills/Colors';
+import { height, width } from 'react-native-dimension';
+import AppColor from '../../../utills/Colors';
 
 const styles = StyleSheet.create({
     mainViewContainer: {
-        backgroundColor: Colors.primaryBlue,
-        flex: 1
+        // backgroundColor: Colors.pageBlack,
+        // flex: 1
     },
-    container: {
+    mainContainer: {
+        backgroundColor: AppColor.primaryBlue,
+        paddingVertical: height(2),
+        borderBottomLeftRadius: width(8),
+        borderBottomRightRadius: width(8)
+    },
+    InnerContainer: {
         width: width(90),
         alignSelf: 'center'
+    },
+    ButtonContainer: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        width: width(90),
+        alignSelf: 'center',
+        marginTop: height(5)
+    },
+    uploadButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: width(.15),
+        borderColor: AppColor.white,
+        padding: width(2),
+        borderRadius: width(2)
+    },
+    buttonText: {
+        fontSize: width(4),
+        color: AppColor.white,
+        marginLeft: width(2),
+    },
+    fileNameText: {
+        fontSize: width(4),
+        marginLeft: width(2),
+        width: '65%',
+        color: AppColor.white60
     }
 });
 export default styles;

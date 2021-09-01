@@ -1,31 +1,29 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
-import Colors from '../../utills/Colors';
-import { height, width } from 'react-native-dimension';
-const Component = ({ date, title, assigne, areacode, description,
-    btnLabel, phone, btnStyle }) => {
+const Component = ({ createdAt = '', submittedBy = '', assignedVendors = '', areacode = '', description = '',
+    onPress = () => { }, status = '', phone = '' }) => {
     return (
-            <View style={styles.detailedtask}>
-                <Image
-                    style={styles.TaskLogo}
-                    source={require('../../assets/images/taskicon.png')}
-                />
-                <View style={styles.textSection}>
-                    <Text style={styles.datetext}>{date}</Text>
-                    <Text style={styles.titletext}>{title}</Text>
-                    <Text style={styles.descriptiontext}>
-                        Assigned to : {assigne}</Text>
-                    <Text style={styles.descriptiontext}>{areacode}</Text>
-                    <Text style={styles.descriptiontext}>{description}</Text>
-                    <Text style={styles.descriptiontext}>phone #:{phone}</Text>
-                </View>
-
-                <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={[styles.newButtonText,btnLabel==='Pending' ? styles.pendingButtonText:btnLabel==='Closed'? styles.closedButtonText :{}]}>{btnLabel}</Text>
-                </TouchableOpacity>
-
+        <TouchableOpacity style={styles.detailedtask} onPress={onPress} activeOpacity={.8}>
+            <Image
+                style={styles.TaskLogo}
+                source={require('../../assets/images/taskicon.png')}
+            />
+            <View style={styles.textSection}>
+                <Text style={styles.createdAtText}>{createdAt}</Text>
+                <Text style={styles.titletext}>{submittedBy}</Text>
+                <Text style={styles.descriptiontext}>
+                    Assigned to : {assignedVendors}</Text>
+                <Text style={styles.descriptiontext}>{areacode}</Text>
+                <Text style={styles.descriptiontext}>{description}</Text>
+                <Text style={styles.descriptiontext}>phone #:{phone}</Text>
             </View>
+
+            <View style={styles.buttonStyle}>
+                <Text style={[styles.newButtonText, status === 'Pending' ? styles.pendingButtonText : status === 'Closed' ? styles.closedButtonText : {}]}>{status}</Text>
+            </View>
+
+        </TouchableOpacity>
     );
 };
 export default Component;

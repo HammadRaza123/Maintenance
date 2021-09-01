@@ -16,8 +16,8 @@ export default function Login(props) {
   let emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const [email, setEmail] = useState('');
   const [emailErrorMsg, setEmailErrorMsg] = useState('');
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('malik.abdullah');
+  const [password, setPassword] = useState('abdullah');
   const [forgotModal, setForgotModal] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [userNameErrorMsg, setUserNameErrorMsg] = useState('');

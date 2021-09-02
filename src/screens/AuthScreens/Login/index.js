@@ -69,7 +69,7 @@ export default function Login(props) {
       };
       const response = await SignIn(details)
       if (response?.success) {
-        dispatch(login(response.data))
+        dispatch(login(response.data, password))
         ToastAndroid.show('Login Successfully', ToastAndroid.SHORT);
       }
       else {

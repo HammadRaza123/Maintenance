@@ -44,6 +44,7 @@ export const InputField = ({
 export const MultiInput = ({
   placeholder = '',
   containerStyle = '',
+  inputTextStyle = '',
   userImage = null,
   username = '',
   value = '',
@@ -51,8 +52,8 @@ export const MultiInput = ({
 }) => {
   return (
     <View style={[styles.greyBox, containerStyle]}>
-      <TextInput multiline={true} numberOfLines={5} style={styles.inputBox}
-        placeholder={placeholder} value={value} onChangeText={onChangeText} />
+      <TextInput multiline={true} numberOfLines={5} style={[styles.inputBox, inputTextStyle]}
+        placeholder={placeholder} placeholderTextColor={AppColors.white} value={value} onChangeText={onChangeText} />
       <View style={styles.row}>
         <Image source={userImage} style={styles.imageStyle} />
         <Text style={styles.reviewerName}>{username}</Text>

@@ -106,3 +106,21 @@ export const Add_NewTask = async (data) => {
         return { message: error?.response?.data, success: false }
     }
 }
+
+export const Get_VendorList = async (data) => {
+    let res
+    try {
+        res = await axios.get(`${routes.AUTH_USER.url}`, {
+            params: data,
+            headers: { Authorization: getToken() }
+        })
+        if (res.status === 200 || res.status === 201 || res.status === 304) {
+            return { success: true, data: res.data }
+        }
+        else {
+            return { success: false, data: [] }
+        }
+    } catch (error) {
+        return { message: error?.response?.data, success: false }
+    }
+}

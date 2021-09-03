@@ -33,6 +33,7 @@ export default function TaskList(props) {
         renderItem={({ item }) => {
           return (
             <TaskListComponent
+              onPress={() => props.navigation.navigate('EditTask', item)}
               key={item._id}
               createdAt={moment(item.createdAt).format('DD-MM-YYYY')}
               submittedBy={item?.submittedBy}

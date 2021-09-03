@@ -11,7 +11,6 @@ export default function Setting() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.Auth.user);
   const currentUser = user.name
-  const currentPassword = user.password
   const [userName, setUserName] = useState(currentUser)
   const [password, setPassword] = useState('')
   const [notes, setNotes] = useState('')
@@ -30,9 +29,6 @@ export default function Setting() {
     <ScreenWrapper scrollEnabled headerUnScrollable={() => <Header title={'Setting'} hideActionIcon />}>
       <View style={styles.mainViewContainer}>
         <View>
-          <Text>
-            hjgygh{currentPassword}
-          </Text>
           <LabelRow labelValue={'User'} value={userName} onChangeText={(value) => setUserName(value)} />
           <LabelRow labelValue={'Password'} value={password} onChangeText={(value) => setPassword(value)} />
           <MultiInput placeholder='Notes' containerStyle={styles.multiBox} inputTextStyle={styles.multiInputTextStyle}

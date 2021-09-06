@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import { width } from 'react-native-dimension';
 import DocumentPicker from 'react-native-document-picker';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -85,12 +85,11 @@ export default function EditTask(props) {
     }
     const response = await Update_Tasks(data)
     if (response?.success) {
-      console.log('====================================');
-      console.log('result is ', JSON.stringify(response));
-      console.log('====================================');
+      ToastAndroid.show('Task Updated Successfully', ToastAndroid.SHORT);
+      props.navigation.navigate('TaskList')
     }
     else {
-      console.log('Task Type error is', JSON.stringify(response));
+      ToastAndroid.show('Unable to Update Task', ToastAndroid.SHORT);
     }
   }
   useEffect(() => {

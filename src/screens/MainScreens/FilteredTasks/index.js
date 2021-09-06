@@ -25,6 +25,7 @@ export default function FilteredTasks({ route, navigation: { navigate } }) {
               <TaskListComponent
                 key={item._id}
                 createdAt={moment(item.createdAt).format('DD-MM-YYYY')}
+                onPress={() => navigate('EditTask', item)}
                 submittedBy={item?.submittedBy}
                 assignedVendors={item?.assignedVendors?.name}
                 areacode={item?.suit + ' , ' + item.area.name}

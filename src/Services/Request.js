@@ -124,3 +124,19 @@ export const Get_VendorList = async (data) => {
         return { message: error?.response?.data, success: false }
     }
 }
+export const Update_Tasks = async (data) => {
+    let res
+    try {
+        res = await axios.put(`${routes.TASKS.url}/details`, data, {
+            headers: { Authorization: getToken() }
+        })
+        if (res.status === 200 || res.status === 201 || res.status === 304) {
+            return { success: true, data: res.data }
+        }
+        else {
+            return { success: false, data: [] }
+        }
+    } catch (error) {
+        return { message: error?.response?.data, success: false }
+    }
+}

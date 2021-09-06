@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { width } from 'react-native-dimension';
+import DocumentPicker from 'react-native-document-picker';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Button from '../../../components/Button';
 import Dropdown from '../../../components/Dropdown';
 import Header from '../../../components/Header';
 import { LabelRow } from '../../../components/InputField';
 import ScreenWrapper from '../../../components/ScreenWrapper';
 import ToggleButton from '../../../components/ToggleButton';
+import { Get_TaskType, Update_Tasks } from '../../../Services/Request';
 import AppColors from '../../../utills/Colors';
-import { width } from 'react-native-dimension';
-import Entypo from 'react-native-vector-icons/Entypo'
-import DocumentPicker from 'react-native-document-picker'
 import styles from './styles';
-import moment from 'moment';
-import { Get_TaskType } from '../../../Services/Request';
 export default function EditTask(props) {
   const currentTask = props.route.params
   const [statusValue, setstatusValue] = useState({ name: currentTask.status });
@@ -39,7 +39,7 @@ export default function EditTask(props) {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       })
-      setFileName(res[0].name)
+      setFileName(res[0])
       // console.log(
       //   'results is ' + JSON.stringify(res),
       //   // res[0].uri,
@@ -65,6 +65,34 @@ export default function EditTask(props) {
       console.log('Task Type error is', JSON.stringify(response));
     }
   }
+  const updateTask = async () => {
+    const data = {
+      _id: currentTask._id,
+      status: statusValue.name,
+      type: currentTask.type._id,
+      suit: suitValue,
+      priority: priority,
+      submittedBy: submittedBy,
+      phone: phoneValue,
+      document: fileName != currentTask.document ?
+        {
+          uri: Platform.OS == 'ios'
+            ? fileName?.uri.replace('file://', '')
+            : fileName?.uri,
+          name: fileName?.name,
+          type: fileName?.type
+        } : currentTask.document
+    }
+    const response = await Update_Tasks(data)
+    if (response?.success) {
+      console.log('====================================');
+      console.log('result is ', JSON.stringify(response));
+      console.log('====================================');
+    }
+    else {
+      console.log('Task Type error is', JSON.stringify(response));
+    }
+  }
   useEffect(() => {
     getTaskTypes()
     // getAreaTypes()
@@ -77,7 +105,7 @@ export default function EditTask(props) {
         <Text style={{ alignSelf: 'center', color: 'red' }}>{currentTask.priority}</Text>
         <View style={styles.InnerContainer}>
           <LabelRow labelValue={'Facility'} value={'Rentdigi'} editable={false} />
-          <LabelRow labelValue={'Email'} value={emailValue} onChangeText={(value) => setEmailValue(value)} />
+          <LabelRow labelValue={'Email'} editable={false} value={emailValue} onChangeText={(value) => setEmailValue(value)} />
           <Dropdown
             defaultValue={statusValue.name}
             option={statusOptions}
@@ -89,19 +117,6 @@ export default function EditTask(props) {
             option={typeOptions}
             onselect={(index, value) => settypeValue(value)}
           />
-          {/* <Dropdown
-            LabelValue={'Select a Area Type'}
-            defaultValue={areaValue}
-            option={areaOptions}
-            onselect={(index) => setareaValue(areaOptions[index])}
-          />
-          <LabelRow labelValue={'Assigned to'} value={assignedValue} onChangeText={(value) => setAssignedValue(value)} />
-          <Dropdown
-            LabelValue={'Select a Task Class'}
-            defaultValue={taskClassValue}
-            option={taskClassOptions}
-            onselect={(index) => setTaskClassValue(taskClassOptions[index])}
-          /> */}
           <LabelRow labelValue={'Suit'} value={suitValue} onChangeText={(value) => setSuitValue(value)} />
           <ToggleButton value={priority} onValueChange={(value) => setPriority(value)}
             toggleLabel={'Priority'}
@@ -116,12 +131,12 @@ export default function EditTask(props) {
               <Entypo name='attachment' size={width(4)} color={AppColors.white} />
               <Text style={styles.buttonText}>{currentTask.document ? "Update File" : "Upload File"}</Text>
             </TouchableOpacity>
-            <Text style={styles.fileNameText}>{fileName ? fileName : null}</Text>
+            <Text style={styles.fileNameText}>{fileName ? fileName.name || fileName : null}</Text>
           </View>
         </View>
         <View style={styles.ButtonContainer}>
           <Button onPress={() => props.navigation.goBack()} title={'Cancel'} />
-          <Button onPress={() => console.log('update the file')} title={'Update'} />
+          <Button onPress={() => updateTask()} title={'Update'} />
         </View>
       </View>
     </ScreenWrapper>

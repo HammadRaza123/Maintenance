@@ -17,23 +17,17 @@ export default function EditTask(props) {
   const currentTask = props.route.params
   const [statusValue, setstatusValue] = useState({ name: currentTask.status });
   const [typeValue, settypeValue] = useState({ name: currentTask.type.name });
-  const [areaValue, setareaValue] = useState({ name: currentTask.area.name });
   const [emailValue, setEmailValue] = useState(currentTask.email);
   const [suitValue, setSuitValue] = useState(currentTask.suit);
   const [priority, setPriority] = useState(currentTask.priority);
-  const [assignedValue, setAssignedValue] = useState(currentTask.assignedManagers[0].name);
   const [submittedBy, setSubmittedBy] = useState(currentTask.submittedBy);
   const [phoneValue, setPhoneValue] = useState(currentTask.phone);
   const [fileName, setFileName] = useState(currentTask.document);
-  const [taskClassValue, setTaskClassValue] = useState(currentTask.taskClass.name);
   const [statusOptions, setstatusOptions] = useState([
     { name: 'New' }, { name: 'Closed' }, { name: 'Re-newed' },
     { name: 'Pending' }, { name: 'Delayed' }, { name: 'Excluded' }
   ]);
   const [typeOptions, settypeOptions] = useState([]);
-  const [areaOptions, setareaOptions] = useState([]);
-  // console.log(currentTask);
-  const [taskClassOptions, setTaskClassOptions] = useState(['class1', 'class2',]);
   const uploadFile = async () => {
     try {
       const res = await DocumentPicker.pick({
@@ -49,7 +43,6 @@ export default function EditTask(props) {
       // )
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
-        // User cancelled the picker, exit any dialogs or menus and move on
       } else {
         throw err
       }
@@ -94,8 +87,6 @@ export default function EditTask(props) {
   }
   useEffect(() => {
     getTaskTypes()
-    // getAreaTypes()
-    // getTaskClass()
   }, [])
   return (
     <ScreenWrapper scrollEnabled containerStyle={{ backgroundColor: AppColors.pageBlack }} headerUnScrollable={() =>
@@ -106,12 +97,14 @@ export default function EditTask(props) {
           <LabelRow labelValue={'Facility'} value={'Rentdigi'} editable={false} />
           <LabelRow labelValue={'Email'} editable={false} value={emailValue} onChangeText={(value) => setEmailValue(value)} />
           <Dropdown
+            LabelValue={'Status'}
             defaultValue={statusValue.name}
             option={statusOptions}
             onselect={(index, value) => setstatusValue(value)}
           />
           <LabelRow labelValue={'Date Created'} value={moment(currentTask.createdAt).format('DD-MM-YYYY')} editable={false} />
           <Dropdown
+            LabelValue={'Type'}
             defaultValue={typeValue.name}
             option={typeOptions}
             onselect={(index, value) => settypeValue(value)}

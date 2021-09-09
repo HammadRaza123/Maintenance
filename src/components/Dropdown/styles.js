@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         color: Colors.pageBlack,
         justifyContent: 'space-between',
         fontSize: width(4),
+        paddingVertical: height(1)
     },
     dropdownIcon: {
         color: Colors.white,
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
         borderRadius: width(1),
         borderColor: Colors.white,
         width: width(85),
+        paddingHorizontal: width(2),
         maxHeight: height(12)
     },
     dropdownTextHighlightStyle: {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 const Component = ({ isObjectData = false, defaultValue, option, onselect, LabelValue }) => {
     return (
@@ -19,10 +18,10 @@ const Component = ({ isObjectData = false, defaultValue, option, onselect, Label
                 }}
                 onSelect={onselect}
             >
-                {/* <View style={styles.Placeholders}> */}
-                {/* <Text style={styles.dropdownText}>{LabelValue}</Text> */}
-                <Text style={styles.dropdownText}>{defaultValue}</Text>
-                {/* </View> */}
+                <View style={styles.Placeholders}>
+                    <Text style={styles.dropdownText}>{LabelValue}</Text>
+                    <Text style={styles.dropdownText}>{defaultValue}</Text>
+                </View>
             </ModalDropdown>
         </View>
     );

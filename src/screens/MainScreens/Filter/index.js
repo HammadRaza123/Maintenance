@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, ToastAndroid } from 'react-native';
+import { ToastAndroid, View } from 'react-native';
 import Button from '../../../components/Button';
 import Dropdown from '../../../components/Dropdown';
 import Header from '../../../components/Header';
 import { LabelRow } from '../../../components/InputField';
 import ScreenWrapper from '../../../components/ScreenWrapper';
-import { Get_FilteredTasks, Get_TaskClass, Get_TaskList } from '../../../Services/Request';
+import { Get_FilteredTasks, Get_TaskClass } from '../../../Services/Request';
 import styles from './styles';
 
 export default function Filter({ navigation: { goBack, navigate } }) {
@@ -28,7 +28,6 @@ export default function Filter({ navigation: { goBack, navigate } }) {
   const getFilterResult = async () => {
     const filterDetails = {
       email: emailValue,
-      // taskClass: taskClassValue._id,
       suit: suitValue,
       submittedBy: submittedBy,
     }
@@ -55,7 +54,8 @@ export default function Filter({ navigation: { goBack, navigate } }) {
           <LabelRow labelValue={'Suit'} value={suitValue} onChangeText={(value) => setSuitValue(value)} />
           <LabelRow labelValue={'Submitted By'} value={submittedBy} onChangeText={(value) => setSubmittedBy(value)} />
           <LabelRow labelValue={'Email'} value={emailValue} onChangeText={(value) => setEmailValue(value)} />
-          <Dropdown defaultValue={taskClassValue.name} option={taskClassOptions}
+          <Dropdown
+            LabelValue={'Class'} defaultValue={taskClassValue.name} option={taskClassOptions}
             onselect={(index, value) => setTaskClassValue(value)} />
         </View>
         <View style={styles.ButtonContainer}>

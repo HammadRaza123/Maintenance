@@ -1,5 +1,6 @@
+import { useFocusEffect } from '@react-navigation/core';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList } from 'react-native';
 import Header from '../../../components/Header';
 import ScreenWrapper from '../../../components/ScreenWrapper';
@@ -17,9 +18,11 @@ export default function TaskList(props) {
       console.log('Task Type error is', JSON.stringify(response.data));
     }
   }
-  useEffect(() => {
-    getTaskList()
-  }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      getTaskList()
+    }, [])
+  );
   return (
     <ScreenWrapper
       headerUnScrollable={() => <Header leadIcon leadingIcon={'plus-a'} title={'Task List'} rightIcon={'equalizer'}

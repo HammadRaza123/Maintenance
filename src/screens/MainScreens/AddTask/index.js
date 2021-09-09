@@ -13,8 +13,7 @@ import ToggleButton from '../../../components/ToggleButton';
 import { Add_NewTask, Get_AreaType, Get_TaskClass, Get_TaskType } from '../../../Services/Request';
 import AppColors from '../../../utills/Colors';
 import styles from './styles';
-export default function AddTask({ navigation }) {
-  const [statusValue, setstatusValue] = useState({ name: 'Status' });
+export default function AddTask({ navigation: { goBack } }) {
   const [typeValue, settypeValue] = useState({ name: 'Select a Task Type' });
   const [areaValue, setareaValue] = useState({ name: 'Select a Area Type' });
   const [taskClassValue, setTaskClassValue] = useState({ name: 'Select a Task Class' });
@@ -25,8 +24,6 @@ export default function AddTask({ navigation }) {
   const [phoneValue, setPhoneValue] = useState('');
   const [imageFile, setImageFile] = useState('');
   const [fileName, setFileName] = useState('');
-  const [statusOptions, setstatusOptions] = useState([{ name: 'New' }, { name: 'Closed' },
-  { name: 'Re-newed' }, { name: 'Pending' }, { name: 'Delayed' }, { name: 'Excluded' }]);
   const [typeOptions, settypeOptions] = useState([]);
   const [areaOptions, setareaOptions] = useState([]);
   const [taskClassOptions, setTaskClassOptions] = useState([]);
@@ -91,7 +88,6 @@ export default function AddTask({ navigation }) {
   }, [])
   const saveTask = async () => {
     const taskDetails = {
-      // status: statusValue,
       email: emailValue,
       type: typeValue._id,
       area: areaValue._id,
@@ -122,27 +118,25 @@ export default function AddTask({ navigation }) {
   return (
 
     <ScreenWrapper scrollEnabled containerStyle={{ backgroundColor: AppColors.pageBlack }} headerUnScrollable={() =>
-      <Header title={'Add Task'} rightIcon={'close-a'} onpressAction={() => navigation.goBack()} />} >
+      <Header title={'Add Task'} rightIcon={'close-a'} onpressAction={() => goBack()} />} >
       <View style={styles.mainContainer}>
         <View style={styles.InnerContainer}>
           <LabelRow labelValue={'Facility'} value={'Rentdigi'} editable={false} />
           <LabelRow labelValue={'Email'} value={emailValue} onChangeText={(value) => setEmailValue(value)} />
-          {/* <Dropdown
-            defaultValue={statusValue.name}
-            option={statusOptions}
-            onselect={(index, value) => setstatusValue(value)}
-          /> */}
           <Dropdown
+            LabelValue={'Type'}
             defaultValue={typeValue.name}
             option={typeOptions}
             onselect={(index, value) => settypeValue(value)}
           />
           <Dropdown
+            LabelValue={'Area'}
             defaultValue={areaValue.name}
             option={areaOptions}
             onselect={(index, value) => setareaValue(value)}
           />
           <Dropdown
+            LabelValue={'Class'}
             defaultValue={taskClassValue.name}
             option={taskClassOptions}
             onselect={(index, value) => setTaskClassValue(value)}

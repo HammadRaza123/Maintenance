@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { height, width } from 'react-native-dimension';
-import { LabelRow } from '.';
 import AppColors from '../../utills/Colors';
 
 const styles = StyleSheet.create({

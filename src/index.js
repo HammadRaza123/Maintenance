@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Routes from './Routes/index';
+import React from 'react';
+import { LogBox } from 'react-native';
 import 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
-import store from './Redux/index';
-import { LogBox } from 'react-native';
+import { store } from './Redux/index';
+import Routes from './Routes/index';
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['componentWillReceiveProps has been renamed, and is not recommended for use']);
 LogBox.ignoreLogs(['VirtualizedLists should never be nested', 'VirtualizedList: missing keys for items,']);

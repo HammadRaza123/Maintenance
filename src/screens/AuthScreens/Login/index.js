@@ -10,14 +10,14 @@ import styles from './styles';
 import Appcolor from '../../../utills/Colors'
 import logo from '../../../assets/images/logo.png'
 import { SignIn } from '../../../Services/Auth';
+import { Get_Status, Reset_Password } from '../../../Services/Request';
 export default function Login(props) {
   const user = useSelector((state) => state.Auth.user);
   const dispatch = useDispatch();
-  let emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const [email, setEmail] = useState('');
   const [emailErrorMsg, setEmailErrorMsg] = useState('');
   const [userName, setUserName] = useState('malik.abdullah');
-  const [password, setPassword] = useState('abdullah');
+  const [password, setPassword] = useState('abc123');
   const [forgotModal, setForgotModal] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [userNameErrorMsg, setUserNameErrorMsg] = useState('');
@@ -46,19 +46,25 @@ export default function Login(props) {
   }
   const onChangeEmail = (value) => {
     setEmail(value)
-    if (emailReg.test(value)) {
+    if (email.length > 2) {
       setEmailErrorMsg('');
       return true;
     } else {
-      setEmailErrorMsg('Invalid Email');
+      setEmailErrorMsg('Invalid User');
       return false;
     }
   }
-  const sendEmail = () => {
+  const sendEmail = async () => {
     if (onChangeEmail(email)) {
-      closeModal()
+      const response = await Reset_Password(userName)
+      if (response?.success) {
+        ToastAndroid.show('Request Sent Successfully', ToastAndroid.SHORT);
+      }
+      else {
+        ToastAndroid.show('Request Failed', ToastAndroid.SHORT);
+      }
     } else {
-      console.log('no');
+      ToastAndroid.show('Please Add Valid User', ToastAndroid.SHORT);
     }
   }
   const _signIn = async () => {
@@ -100,7 +106,7 @@ export default function Login(props) {
         cancelBtnTextStyle={styles.cancelBtnTextStyle} onPressCancel={() => closeModal()}
         onPressSend={() => sendEmail()} value={email} onChangeText={(value) => onChangeEmail(value.trim())}
         errorEnabled={emailErrorMsg != ''} errorMsg={emailErrorMsg}
-        modalBodyText='Enter your email, you will receive details to retreive your password'
+        modalBodyText='Enter your user name, you will receive details to retreive your password'
       />
     </ScreenWrapper>
   );

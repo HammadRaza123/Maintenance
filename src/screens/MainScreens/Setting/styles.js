@@ -22,6 +22,12 @@ const styles = StyleSheet.create({
   },
   multiInputTextStyle: {
     color: Colors.white
+  },
+  saveBtn: {
+    backgroundColor: Colors.primaryBlue,
+    position: 'absolute',
+    right: 0,
+    bottom: -height(8)
   }
 });
 export default styles;

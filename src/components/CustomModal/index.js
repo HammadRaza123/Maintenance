@@ -67,7 +67,7 @@ export const ForgotModal = ({
 
             <View style={styles.bodyContainer}>
                 <Text style={styles.modalBodyText}>{modalBodyText}</Text>
-                <InputField mainContainer={styles.inputBox} placeholder='email' value={value}
+                <InputField mainContainer={styles.inputBox} placeholder='User Name' value={value}
                     onChangeText={(value) => onChangeText(value)} errorMsg={errorMsg} errorEnabled={errorEnabled}
                 />
                 <View style={styles.row}>

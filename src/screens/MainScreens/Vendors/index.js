@@ -30,7 +30,7 @@ export default function Vendors(props) {
         showsVerticalScrollIndicator={false}
         data={vendorList}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+      // keyExtractor={item => item.id}
       />
     </ScreenWrapper>
   );

@@ -1,50 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/core';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { width } from 'react-native-dimension';
 import { PieChart } from "react-native-gifted-charts";
 import Header from '../../../components/Header';
 import ScreenWrapper from '../../../components/ScreenWrapper';
-import { Get_TaskList } from '../../../Services/Request';
+import { Get_Status } from '../../../Services/Request';
 import styles from './styles';
 export default function Stats() {
-  const data = [
-    { value: 50, text: 'New' },
-    { value: 80, text: 'Pending' },
-    { value: 50, text: 'Closed' },
-    { value: 80, text: 'Delayed' },
-    { value: 80, text: 'Canceled' },
-  ]
-  let arr = ['pending', 'inprogess', 'canceled', 'delayed', 'pending', 'inprogess',
-    'canceled', 'delayed', 'pending', 'inprogess', 'canceled', 'delayed', 'pending',
-    'inprogess', 'canceled', 'delayed', 'pending', 'inprogess', 'canceled', 'delayed',]
-  const [taskList, setTaskList] = useState([])
-  const getTaskList = async () => {
-    const response = await Get_TaskList()
+  const [data, setData] = useState([])
+  const renderItem = ({ item }) => (
+    <View style={styles.valueRow}>
+      <Text style={styles.textValue}>{item.text}</Text>
+      <Text style={styles.textValue}>{item.value}</Text>
+    </View>
+  );
+  const statusHeader = () => {
+    return (
+      <View style={styles.valueRow}>
+        <Text style={styles.headingText}>Status</Text>
+        <Text style={styles.headingText}>Value</Text>
+      </View>
+    )
+  }
+  const getStatusCount = async () => {
+    const response = await Get_Status()
     if (response?.success) {
-      const sdata = response.data.tasks?.map(i => i.status) //console.log
-      setTaskList(sdata)
+      setData(response?.data?.data)
     }
     else {
-      console.log('Task Type error is', JSON.stringify(response.data));
+      console.log('Status count error is' + JSON.stringify(response.data));
     }
   }
-  useEffect(() => {
-    getTaskList()
-  }, [])
 
+  useFocusEffect(
+    React.useCallback(() => {
+      getStatusCount()
+    }, [])
+  );
   return (
     <ScreenWrapper scrollEnabled headerUnScrollable={() => <Header title={'Stats'} hideActionIcon />}>
       <View
         style={styles.mainViewContainer} >
         <PieChart donut={true} data={data}
-          // radius={120}       //size pie
           showText={true} textSize={width(3)}
         />
-        {console.log('result is ', taskList)}
-        {/* <Text>
-          {taskList}
-        </Text> */}
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={statusHeader()}
+          data={data}
+          renderItem={renderItem}
+        />
       </View>
     </ScreenWrapper>
   );

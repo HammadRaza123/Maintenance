@@ -21,7 +21,7 @@ export default function HavcInfo({ navigation: { goBack } }) {
     <SafeAreaView style={styles.mainViewContainer}>
       <Header hideActionIcon
         leadIcon
-        leadingIcon={'angle-left'} onpressADD={() => goBack()}
+        leadingIcon={'leftcircle'} onpressADD={() => goBack()}
         title={'Vendors Information'}
       />
       <View style={{ marginTop: width(2) }}></View>

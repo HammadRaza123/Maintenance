@@ -4,9 +4,9 @@ import Colors from '../../utills/Colors';
 
 const styles = StyleSheet.create({
     dropdownView: {
-        marginBottom: width(1),
+        // marginBottom: width(1),
     },
-    Placeholders: {
+    innerValue: {
         justifyContent: 'space-between',
         flexDirection: "row",
         alignItems: 'center',
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     dropdownOption: {
         color: Colors.pageBlack,
-        justifyContent: 'space-between',
+        alignSelf: 'flex-end',
         fontSize: width(4),
         paddingVertical: height(1)
     },
@@ -43,9 +43,11 @@ const styles = StyleSheet.create({
         borderWidth: width(0.15),
         borderRadius: width(1),
         borderColor: Colors.white,
-        width: width(85),
+        width: width(50),
         paddingHorizontal: width(2),
-        maxHeight: height(12)
+        maxHeight: height(15),
+        marginTop: height(1),
+        marginLeft: width(39)
     },
     dropdownTextHighlightStyle: {
         backgroundColor: Colors.primaryBlue,

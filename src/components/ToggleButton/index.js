@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Switch } from 'react-native';
+import { Switch, Text, View } from 'react-native';
 import styles from './styles';
-import Colors from '../../utills/Colors';
 const Component = ({ toggleLabel, trackOffColor, trackOnColor, value, onValueChange }) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
     <View style={styles.container}>

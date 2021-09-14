@@ -72,7 +72,7 @@ export const LabelRow = ({
   return (
     <View style={styles.labelRow}>
       <Text style={styles.labelValue}>{labelValue}</Text>
-      <TextInput style={styles.inputValue} value={value} onChangeText={onChangeText} keyboardType={keyboardType}
+      <TextInput style={editable ? styles.editableInputValue : styles.inputValue} value={value} onChangeText={onChangeText} keyboardType={keyboardType}
         editable={editable} />
     </View>
   )

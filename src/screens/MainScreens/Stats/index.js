@@ -40,7 +40,7 @@ export default function Stats() {
     }, [])
   );
   return (
-    <ScreenWrapper scrollEnabled headerUnScrollable={() => <Header title={'Stats'} hideActionIcon />}>
+    <ScreenWrapper scrollEnabled headerUnScrollable={() => <Header title={'Statistics'} hideActionIcon />}>
       <View
         style={styles.mainViewContainer} >
         <PieChart donut={true} data={data}

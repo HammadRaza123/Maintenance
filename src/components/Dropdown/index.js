@@ -18,7 +18,7 @@ const Component = ({ isObjectData = false, defaultValue, option, onselect, Label
                 }}
                 onSelect={onselect}
             >
-                <View style={styles.Placeholders}>
+                <View style={styles.innerValue}>
                     <Text style={styles.dropdownText}>{LabelValue}</Text>
                     <Text style={styles.dropdownText}>{defaultValue}</Text>
                 </View>

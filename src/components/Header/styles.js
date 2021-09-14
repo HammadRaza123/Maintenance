@@ -7,12 +7,10 @@ const styles = StyleSheet.create({
 
     },
     leadingIcon: {
-        justifyContent: 'center',
+        left: width(5)
+    },
+    emptyView: {
         left: width(5),
-        padding: width(2),
-        alignSelf: 'center',
-        borderRadius: width(4),
-        backgroundColor: Colors.white
     },
     titleText: {
         textAlign: 'center',
@@ -21,28 +19,26 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         color: Colors.white
     },
-    headerRightSection: {
-        width: '25%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+    rightEmptyView: {
+        right: width(5),
+        alignSelf: 'center',
+        padding: width(2),
+        borderRadius: width(4)
     },
     rightIcon: {
         right: width(5),
         alignSelf: 'center',
         backgroundColor: Colors.white,
         padding: width(2),
-        borderRadius: width(4),
-
+        borderRadius: width(4)
     },
     headerContainer: {
         backgroundColor: Colors.primaryBlue,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: height(1.5),
-        // borderBottomLeftRadius: width(5),
-        // borderBottomRightRadius: width(5),
-        alignContent: 'center'
+        alignItems: 'center',
+        elevation: 1
     }
 }
 );

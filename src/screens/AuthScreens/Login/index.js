@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Text, View, Image, TouchableOpacity, ToastAndroid } from 'react-native';
+import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import logo from '../../../assets/images/logo.png';
 import Button from '../../../components/Button';
-import ScreenWrapper from '../../../components/ScreenWrapper';
-import { InputField } from '../../../components/InputField';
 import { ForgotModal } from '../../../components/CustomModal';
+import { InputField } from '../../../components/InputField';
+import ScreenWrapper from '../../../components/ScreenWrapper';
 import { login } from '../../../Redux/Actions/Auth';
-import styles from './styles';
-import Appcolor from '../../../utills/Colors'
-import logo from '../../../assets/images/logo.png'
 import { SignIn } from '../../../Services/Auth';
-import { Get_Status, Reset_Password } from '../../../Services/Request';
+import { Reset_Password } from '../../../Services/Request';
+import Appcolor from '../../../utills/Colors';
+import styles from './styles';
 export default function Login(props) {
   const user = useSelector((state) => state.Auth.user);
   const dispatch = useDispatch();
@@ -19,6 +19,8 @@ export default function Login(props) {
   const [userName, setUserName] = useState('malik.abdullah');
   const [password, setPassword] = useState('abc123');
   const [forgotModal, setForgotModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [sendingStatus, setSendingStatus] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [userNameErrorMsg, setUserNameErrorMsg] = useState('');
   const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
@@ -55,19 +57,24 @@ export default function Login(props) {
     }
   }
   const sendEmail = async () => {
+    setSendingStatus(true)
     if (onChangeEmail(email)) {
       const response = await Reset_Password(userName)
       if (response?.success) {
+        setSendingStatus(false)
         ToastAndroid.show('Request Sent Successfully', ToastAndroid.SHORT);
       }
       else {
+        setSendingStatus(false)
         ToastAndroid.show('Request Failed', ToastAndroid.SHORT);
       }
     } else {
+      setSendingStatus(false)
       ToastAndroid.show('Please Add Valid User', ToastAndroid.SHORT);
     }
   }
   const _signIn = async () => {
+    setIsLoading(true)
     if (onChangeUserName(userName) == true && onChangePassword(password) == true) {
       let details = {
         username: userName,
@@ -75,10 +82,12 @@ export default function Login(props) {
       };
       const response = await SignIn(details)
       if (response?.success) {
+        setIsLoading(false)
         dispatch(login(response.data))
         ToastAndroid.show('Login Successfully', ToastAndroid.SHORT);
       }
       else {
+        setIsLoading(false)
         ToastAndroid.show('Invalid user details', ToastAndroid.SHORT);
         console.log(response);
       }
@@ -97,7 +106,7 @@ export default function Login(props) {
           secureTextEntry={passwordVisibility} onPressSuffix={() => togglePassword()}
           value={password} onChangeText={(value) => onChangePassword(value)}
           errorEnabled={passwordErrorMsg != ''} errorMsg={passwordErrorMsg} />
-        <Button title="Login" onPress={_signIn} containerStyle={styles.btnStyle} />
+        <Button isLoading={isLoading} loaderColor={Appcolor.white} title="Login" onPress={_signIn} containerStyle={styles.btnStyle} />
         <TouchableOpacity style={styles.forgotBtn} onPress={() => setForgotModal(true)}>
           <Text style={styles.forgotText}>Forgot Password?</Text>
         </TouchableOpacity>
@@ -105,7 +114,7 @@ export default function Login(props) {
       <ForgotModal modalHeading='Forgot password' onClose={() => closeModal()} isVisible={forgotModal}
         cancelBtnTextStyle={styles.cancelBtnTextStyle} onPressCancel={() => closeModal()}
         onPressSend={() => sendEmail()} value={email} onChangeText={(value) => onChangeEmail(value.trim())}
-        errorEnabled={emailErrorMsg != ''} errorMsg={emailErrorMsg}
+        errorEnabled={emailErrorMsg != ''} errorMsg={emailErrorMsg} sendingStatus={sendingStatus}
         modalBodyText='Enter your user name, you will receive details to retreive your password'
       />
     </ScreenWrapper>

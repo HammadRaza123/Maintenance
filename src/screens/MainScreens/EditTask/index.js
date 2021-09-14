@@ -15,6 +15,7 @@ import AppColors from '../../../utills/Colors';
 import styles from './styles';
 export default function EditTask(props) {
   const currentTask = props.route.params
+  const [updateStatus, setUpdateStatus] = useState(false);
   const [statusValue, setstatusValue] = useState({ name: currentTask.status });
   const [typeValue, settypeValue] = useState({ name: currentTask.type.name });
   const [emailValue, setEmailValue] = useState(currentTask.email);
@@ -59,6 +60,7 @@ export default function EditTask(props) {
     }
   }
   const updateTask = async () => {
+    setUpdateStatus(true)
     const data = {
       _id: currentTask._id,
       status: statusValue.name,
@@ -78,10 +80,12 @@ export default function EditTask(props) {
     }
     const response = await Update_Tasks(data)
     if (response?.success) {
+      setUpdateStatus(false)
       ToastAndroid.show('Task Updated Successfully', ToastAndroid.SHORT);
       props.navigation.navigate('TaskList')
     }
     else {
+      setUpdateStatus(false)
       ToastAndroid.show('Unable to Update Task', ToastAndroid.SHORT);
     }
   }
@@ -128,7 +132,7 @@ export default function EditTask(props) {
         </View>
         <View style={styles.ButtonContainer}>
           <Button onPress={() => props.navigation.goBack()} title={'Cancel'} />
-          <Button onPress={() => updateTask()} title={'Update'} />
+          <Button isLoading={updateStatus} loaderColor={AppColors.white} onPress={() => updateTask()} title={'Update'} />
         </View>
       </View>
     </ScreenWrapper>

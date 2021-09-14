@@ -6,18 +6,16 @@ const styles = StyleSheet.create({
     vendorContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // paddingHorizontal: width(4),
-        marginVertical: width(3),
+        marginVertical: height(.7),
         alignItems: 'center',
-        // width: width(90),
-        marginHorizontal:width(4),
+        marginHorizontal: width(4),
         borderRadius: width(2),
         backgroundColor: Colors.white
     },
     vendorLogo: {
         width: width(30),
         height: width(30),
-        justifyContent:'flex-start'
+        justifyContent: 'flex-start'
         // backgroundColor: 'red',
 
     },
@@ -30,7 +28,7 @@ const styles = StyleSheet.create({
     vendorIcon: {
         color: Colors.primaryBlue,
         fontSize: width(8),
-        paddingRight:width(2)
+        paddingRight: width(2)
     }
 }
 );

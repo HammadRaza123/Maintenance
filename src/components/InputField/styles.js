@@ -91,6 +91,14 @@ const styles = StyleSheet.create({
     padding: 0,
     textDecorationLine: "none",
     textAlign: 'right'
+  },
+  editableInputValue: {
+    width: '70%',
+    color: AppColors.white,
+    fontSize: width(4),
+    padding: 0,
+    textDecorationLine: "none",
+    textAlign: 'right'
   }
 });
 export default styles;

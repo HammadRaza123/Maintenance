@@ -21,6 +21,7 @@ export default function AddTask({ navigation: { goBack } }) {
   const [suitValue, setSuitValue] = useState('');
   const [submittedBy, setSubmittedBy] = useState('');
   const [priorityValue, setPriorityValue] = useState(true);
+  const [saveStatus, setSaveStatus] = useState(false);
   const [phoneValue, setPhoneValue] = useState('');
   const [imageFile, setImageFile] = useState('');
   const [fileName, setFileName] = useState('');
@@ -34,13 +35,13 @@ export default function AddTask({ navigation: { goBack } }) {
       })
       setImageFile(res[0])
       setFileName(res[0].name)
-      console.log(
-        'results is ' + JSON.stringify(res),
-        // res[0].uri,
-        // res[0].type, // mime type
-        // res[0].name,
-        // res[0].size,
-      )
+      // console.log(
+      //   'results is ' + JSON.stringify(res),
+      //   // res[0].uri,
+      //   // res[0].type, // mime type
+      //   // res[0].name,
+      //   // res[0].size,
+      // )
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
@@ -87,6 +88,7 @@ export default function AddTask({ navigation: { goBack } }) {
     getTaskClass()
   }, [])
   const saveTask = async () => {
+    setSaveStatus(true)
     const taskDetails = {
       email: emailValue,
       type: typeValue._id,
@@ -106,10 +108,12 @@ export default function AddTask({ navigation: { goBack } }) {
     }
     const response = await Add_NewTask(taskDetails)
     if (response?.success) {
+      setSaveStatus(false)
       ToastAndroid.show('Task Added Successfully', ToastAndroid.SHORT);
       navigation.navigate('TaskList')
     }
     else {
+      setSaveStatus(false)
       ToastAndroid.show('Please fill all Details', ToastAndroid.SHORT);
       console.log('Add Task error is', JSON.stringify(response));
     }
@@ -164,7 +168,7 @@ export default function AddTask({ navigation: { goBack } }) {
         </View>
         <View style={styles.ButtonContainer}>
           <Button onPress={() => goBack()} title={'Cancel'} />
-          <Button onPress={() => saveTask()} title={'Save'} />
+          <Button isLoading={saveStatus} loaderColor={AppColors.white} onPress={() => saveTask()} title={'Save'} />
         </View>
       </View>
     </ScreenWrapper>

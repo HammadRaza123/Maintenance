@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { height, width } from 'react-native-dimension';
+import { height } from 'react-native-dimension';
 import Modal from 'react-native-modal';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AppColors from '../../utills/Colors';
@@ -53,6 +53,7 @@ export const ForgotModal = ({
     onPressSend = () => { },
     errorMsg = '',
     errorEnabled = false,
+    sendingStatus = false,
     cancelBtnTextStyle = {}
 }) => {
     return (<Modal isVisible={isVisible} >
@@ -73,7 +74,7 @@ export const ForgotModal = ({
                 <View style={styles.row}>
                     <Button containerStyle={styles.noButtonStyle} btnTextStyle={cancelBtnTextStyle}
                         title={'Cancel'} onPress={onPressCancel} />
-                    <Button containerStyle={styles.buttonStyle}
+                    <Button isLoading={sendingStatus} containerStyle={styles.buttonStyle} loaderColor={AppColors.white}
                         title={'Send Email'} onPress={onPressSend} />
                 </View>
 

@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   labelValue: {
-    width: '25%',
+    width: '27%',
     color: AppColors.white,
     fontSize: width(4)
   },

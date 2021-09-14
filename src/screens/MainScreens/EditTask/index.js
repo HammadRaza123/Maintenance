@@ -132,7 +132,7 @@ export default function EditTask(props) {
         </View>
         <View style={styles.ButtonContainer}>
           <Button onPress={() => props.navigation.goBack()} title={'Cancel'} />
-          <Button isLoading={updateStatus} loaderColor={AppColors.white} onPress={() => updateTask()} title={'Update'} />
+          <Button isLoading={updateStatus} onPress={() => updateTask()} title={'Update'} />
         </View>
       </View>
     </ScreenWrapper>

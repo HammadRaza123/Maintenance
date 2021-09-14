@@ -9,7 +9,7 @@ const Button = ({
   containerStyle = {},
   btnTextStyle = {},
   isLoading = false,
-  loaderColor = Colors.primaryBlue
+  loaderColor = Colors.white
 }) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle]}>

@@ -8,7 +8,7 @@ import styles from './styles';
 export default function FilteredTasks({ route, navigation: { navigate } }) {
   const filteredResult = route?.params;
   return (
-    <ScreenWrapper headerUnScrollable={() => <Header leadIcon leadingIcon={'plus-a'} title={'Filtered Tasks'} rightIcon={'equalizer'}
+    <ScreenWrapper headerUnScrollable={() => <Header leadIcon leadingIcon={'pluscircle'} title={'Filtered Tasks'} rightIcon={'equalizer'}
       onpressADD={() => navigate('AddTask')} onpressAction={() => navigate('Filter')}
     />}>
 

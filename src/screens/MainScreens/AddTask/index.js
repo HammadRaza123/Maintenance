@@ -168,7 +168,7 @@ export default function AddTask({ navigation: { goBack } }) {
         </View>
         <View style={styles.ButtonContainer}>
           <Button onPress={() => goBack()} title={'Cancel'} />
-          <Button isLoading={saveStatus} loaderColor={AppColors.white} onPress={() => saveTask()} title={'Save'} />
+          <Button isLoading={saveStatus} onPress={() => saveTask()} title={'Save'} />
         </View>
       </View>
     </ScreenWrapper>

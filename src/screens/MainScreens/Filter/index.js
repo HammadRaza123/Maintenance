@@ -6,6 +6,7 @@ import Header from '../../../components/Header';
 import { LabelRow } from '../../../components/InputField';
 import ScreenWrapper from '../../../components/ScreenWrapper';
 import { Get_FilteredTasks, Get_TaskClass } from '../../../Services/Request';
+import Colors from '../../../utills/Colors';
 import styles from './styles';
 
 export default function Filter({ navigation: { goBack, navigate } }) {
@@ -14,6 +15,7 @@ export default function Filter({ navigation: { goBack, navigate } }) {
   const [suitValue, setSuitValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [submittedBy, setSubmittedBy] = useState('');
+  const [filterStatus, setFilterStatus] = useState(false);
 
   const getTaskClass = async () => {
     const response = await Get_TaskClass()
@@ -26,6 +28,7 @@ export default function Filter({ navigation: { goBack, navigate } }) {
     }
   }
   const getFilterResult = async () => {
+    setFilterStatus(true)
     const filterDetails = {
       email: emailValue,
       suit: suitValue,
@@ -33,9 +36,11 @@ export default function Filter({ navigation: { goBack, navigate } }) {
     }
     const response = await Get_FilteredTasks(filterDetails)
     if (response?.success) {
+      setFilterStatus(false)
       navigate('FilteredTasks', response.data.tasks)
     }
     else {
+      setFilterStatus(false)
       console.log('Task Type error is', response.message);
       ToastAndroid.show('Result not found', ToastAndroid.SHORT);
     }
@@ -60,7 +65,7 @@ export default function Filter({ navigation: { goBack, navigate } }) {
         </View>
         <View style={styles.ButtonContainer}>
           <Button onPress={() => goBack()} title={'Cancel'} />
-          <Button onPress={() => getFilterResult()} title={'Filter'} />
+          <Button isLoading={filterStatus} onPress={() => getFilterResult()} title={'Filter'} />
         </View>
 
       </View>

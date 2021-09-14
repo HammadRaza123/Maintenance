@@ -10,11 +10,6 @@ const styles = StyleSheet.create({
     height: height(83),
     justifyContent: 'space-between'
   },
-  row: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   multiBox: {
     borderColor: Colors.white,
     borderWidth: width(.15),
@@ -28,6 +23,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: -height(8)
+  },
+  updateBtn: {
+    alignSelf: 'flex-end',
+    backgroundColor: Colors.primaryBlue
+  },
+  logoutBtn: {
+    width: width(40),
+    alignSelf: 'center',
+    backgroundColor: Colors.white,
+    borderColor: Colors.red,
+    borderWidth: width(.5)
+  },
+  logoutBtnText: {
+    color: Colors.red
   }
 });
 export default styles;

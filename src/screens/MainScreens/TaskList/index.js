@@ -1,7 +1,7 @@
 import { useFocusEffect } from '@react-navigation/core';
 import moment from 'moment';
 import React, { useState } from 'react';
-import { ActivityIndicator, FlatList, Text } from 'react-native';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import Header from '../../../components/Header';
 import ScreenWrapper from '../../../components/ScreenWrapper';
 import TaskListComponent from '../../../components/Tasklist';
@@ -31,8 +31,10 @@ export default function TaskList(props) {
         onpressADD={() => props.navigation.navigate('AddTask')}
         onpressAction={() => props.navigation.navigate('Filter')}
       />}>
-      {taskList == [] ?
-        <ActivityIndicator color={Colors.white} size='large' />
+      {taskList == '' ?
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={Colors.primaryBlue} size='large' />
+        </View>
         :
         <FlatList style={styles.mainViewContainer}
           data={taskList}

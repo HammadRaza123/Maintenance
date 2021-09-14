@@ -8,6 +8,7 @@ import ScreenWrapper from '../../../components/ScreenWrapper';
 import { logout } from '../../../Redux/Actions/Auth';
 import { notes } from '../../../Redux/Actions/Notes';
 import { Update_Password } from '../../../Services/Request';
+import Colors from '../../../utills/Colors';
 import styles from './styles';
 export default function Setting() {
   const dispatch = useDispatch();
@@ -15,9 +16,18 @@ export default function Setting() {
   const Savednotes = useSelector((state) => state.Notes.notes);
   const currentUser = user.name
   const [password, setPassword] = useState('')
+  const [saveStatus, setSaveStatus] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState(false);
   const [newPassword, setNewPassword] = useState('')
   const [notesValue, setNotes] = useState(Savednotes)
+  const savednotes = () => {
+    setSaveStatus(true)
+    dispatch(notes(notesValue)),
+      ToastAndroid.show('Notes Saved', ToastAndroid.SHORT)
+    setSaveStatus(false)
+  }
   const update = async () => {
+    setUpdateStatus(true)
     const details = {
       username: user.username,
       password: password,
@@ -25,9 +35,11 @@ export default function Setting() {
     }
     const response = await Update_Password(details)
     if (response?.success) {
+      setUpdateStatus(false)
       ToastAndroid.show('Updated Successfully', ToastAndroid.SHORT);
     }
     else {
+      setUpdateStatus(false)
       ToastAndroid.show('Update Failed', ToastAndroid.LONG);
     }
   }
@@ -38,20 +50,15 @@ export default function Setting() {
           <LabelRow labelValue={'User'} value={currentUser} editable={false} />
           <LabelRow labelValue={'Password'} value={password} onChangeText={(value) => setPassword(value)} />
           <LabelRow labelValue={'New Password'} value={newPassword} onChangeText={(value) => setNewPassword(value)} />
+          <Button containerStyle={styles.updateBtn} isLoading={updateStatus} title='Update' onPress={() => update()} />
           <View>
             <MultiInput placeholder='Notes' containerStyle={styles.multiBox} inputTextStyle={styles.multiInputTextStyle}
               value={notesValue} onChangeText={(value) => setNotes(value)} />
-            <Button title='Save Note' containerStyle={styles.saveBtn}
-              onPress={() => {
-                dispatch(notes(notesValue)),
-                  ToastAndroid.show('Notes Saved', ToastAndroid.SHORT)
-              }} />
+            <Button isLoading={saveStatus} title='Save Note' containerStyle={styles.saveBtn}
+              onPress={() => savednotes()} />
           </View>
         </View>
-        <View style={styles.row}>
-          <Button title='logout' onPress={() => dispatch(logout())} />
-          <Button title='Update' onPress={() => update()} />
-        </View>
+        <Button containerStyle={styles.logoutBtn} btnTextStyle={styles.logoutBtnText} title='Logout' onPress={() => dispatch(logout())} />
       </View>
     </ScreenWrapper>
   );

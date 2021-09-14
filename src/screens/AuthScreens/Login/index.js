@@ -106,7 +106,7 @@ export default function Login(props) {
           secureTextEntry={passwordVisibility} onPressSuffix={() => togglePassword()}
           value={password} onChangeText={(value) => onChangePassword(value)}
           errorEnabled={passwordErrorMsg != ''} errorMsg={passwordErrorMsg} />
-        <Button isLoading={isLoading} loaderColor={Appcolor.white} title="Login" onPress={_signIn} containerStyle={styles.btnStyle} />
+        <Button isLoading={isLoading} title="Login" onPress={_signIn} containerStyle={styles.btnStyle} />
         <TouchableOpacity style={styles.forgotBtn} onPress={() => setForgotModal(true)}>
           <Text style={styles.forgotText}>Forgot Password?</Text>
         </TouchableOpacity>

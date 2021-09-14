@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import Header from '../../../components/Header';
 import ScreenWrapper from '../../../components/ScreenWrapper';
 import VendorSection from '../../../components/VendorSection';
 import { Get_VendorList } from '../../../Services/Request';
+import Colors from '../../../utills/Colors';
 import styles from './styles';
 export default function Vendors(props) {
   const [vendorList, setVendorList] = useState([])
@@ -26,12 +27,17 @@ export default function Vendors(props) {
   }, [])
   return (
     <ScreenWrapper headerUnScrollable={() => <Header hideActionIcon title={'Vendors'} />} >
-      <FlatList style={styles.mainViewContainer}
-        showsVerticalScrollIndicator={false}
-        data={vendorList}
-        renderItem={renderItem}
-      // keyExtractor={item => item.id}
-      />
+      {vendorList == '' ?
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator color={Colors.primaryBlue} size='large' />
+        </View>
+        :
+        <FlatList style={styles.mainViewContainer}
+          showsVerticalScrollIndicator={false}
+          data={vendorList}
+          renderItem={renderItem}
+        // keyExtractor={item => item.id}
+        />}
     </ScreenWrapper>
   );
 }

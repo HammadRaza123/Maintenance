@@ -74,7 +74,7 @@ export const ForgotModal = ({
                 <View style={styles.row}>
                     <Button containerStyle={styles.noButtonStyle} btnTextStyle={cancelBtnTextStyle}
                         title={'Cancel'} onPress={onPressCancel} />
-                    <Button isLoading={sendingStatus} containerStyle={styles.buttonStyle} loaderColor={AppColors.white}
+                    <Button isLoading={sendingStatus} containerStyle={styles.buttonStyle}
                         title={'Send Email'} onPress={onPressSend} />
                 </View>
 

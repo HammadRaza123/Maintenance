@@ -1,12 +1,13 @@
 import { useFocusEffect } from '@react-navigation/core';
 import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { width } from 'react-native-dimension';
 import { PieChart } from "react-native-gifted-charts";
 import Header from '../../../components/Header';
 import ScreenWrapper from '../../../components/ScreenWrapper';
 import { Get_Status } from '../../../Services/Request';
+import Colors from '../../../utills/Colors';
 import styles from './styles';
 export default function Stats() {
   const [data, setData] = useState([])
@@ -40,18 +41,23 @@ export default function Stats() {
     }, [])
   );
   return (
-    <ScreenWrapper scrollEnabled headerUnScrollable={() => <Header title={'Statistics'} hideActionIcon />}>
+    <ScreenWrapper headerUnScrollable={() => <Header title={'Statistics'} hideActionIcon />}>
       <View
         style={styles.mainViewContainer} >
-        <PieChart donut={true} data={data}
-          showText={true} textSize={width(3)}
-        />
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          ListHeaderComponent={statusHeader()}
-          data={data}
-          renderItem={renderItem}
-        />
+        {data == '' ?
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator color={Colors.primaryBlue} size='large' />
+          </View>
+          : <><PieChart donut={true} data={data}
+            showText={true} textSize={width(3)}
+          />
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              ListHeaderComponent={statusHeader()}
+              data={data}
+              renderItem={renderItem}
+            /></>
+        }
       </View>
     </ScreenWrapper>
   );
